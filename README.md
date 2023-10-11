@@ -4,9 +4,9 @@ Functional tissue units (FTUs) form the basic building blocks of organs and are 
 
 The repo is structured in the following way:
 
-├── code
-├── data
-├── visualization
+- Code
+- Data
+- Visualization
 
   ### Data
 
@@ -16,7 +16,7 @@ The repo is structured in the following way:
   
   ### Code
 
-Tgis code generate a photo clickable poster that connects all the 22 FTUs of 5th release HRA with vasculature in butterfly design. This has nodes as anatomical structures and edges as the cell types of both female and male organs.
+This code generate a photo clickable poster that connects all the 22 FTUs of 5th release HRA with vasculature in butterfly design. This has nodes as anatomical structures and edges as the cell types of both female and male organs.
     #### Requirements of code:
     - python
     - jupyter
