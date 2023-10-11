@@ -2,6 +2,8 @@
 
 Functional tissue units (FTUs) form the basic building blocks of organs and are important for understanding and modeling the healthy physiological function of the organ and changes during disease states. In this first comprehensive catalog of FTUs, we document the definition, physical dimensions, vasculature, and cellular composition of 22 anatomically correct, nested functional tissue units (FTUs) in 10 healthy human organs. The catalog includes datasets, illustrations, an interactive online FTU explorer, and a large printable poster. All data and code are freely available. This is part of a larger ongoing international effort to construct a Human Reference Atlas (HRA) of all cells in the human body.
 
+Authors: Supriya Bidanta, Katy Börner, Bruce W. Herr II, Marcell Nagy, Katherine S. Gustilo, Rachel Bajema, Libby Maier, Roland Molontay, Griffin Weber
+
 The repo is structured in the following way:
 
 ```
@@ -12,7 +14,7 @@ The repo is structured in the following way:
 
 ### Data
 
-- Table 1: Supplemental file of vascular pathways. This data contains information about the 22 FTUs, vessels linked and the heart through steps that provide information about the inflow and outflow from the heart to the FTU and back to the heart. 
+- Table 1: Supplemental file of vascular pathways. This data contains information about the 22 FTUs linked to the heart through vessels. 
   
 ### Code
 
