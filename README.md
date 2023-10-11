@@ -18,7 +18,7 @@ The repo is structured in the following way:
   
 ### Code
 
-This code generate a photo clickable poster that connects all the 22 FTUs of 5th release HRA with vasculature in butterfly design. This has nodes as anatomical structures and edges as the cell types of both female and male organs.
+This code generate a photo clickable poster that connects all the 22 FTUs of 5th release HRA with vasculature in butterfly design. This has nodes as anatomical structures and edges as the cell types of both female and male organs. The visualization is composed of two radial tree graphs: (1) The first graph contains the nested “partonomy” of the anatomical structures and cell types in the HRA. (2) The second graph contains all the blood vessels in the HRA, with the chambers of the heart in the center, and increasing smaller vessels more distal to the heart again branching outwards from the center
 
 ##### Prerequisite:
     - python
