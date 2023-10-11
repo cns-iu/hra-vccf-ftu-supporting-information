@@ -35,7 +35,7 @@ The code is segmented into four parts:
 - Beautify and/or filter the visualization per the connections we have from the vasculature data.
 
 ### Visualization:
-We have provided a 36" poster full image along with it two halves of the image as well. Since the poster is of 36",while taking a print we recommend to resize the two halves to 35.5" so that poster looks clean and aligned.
+We have included a full image of the 36" poster, along with two halves of the same image. To ensure a clean and aligned look when printing the poster, we recommend resizing the two halves to 35.5".
 
 
 
