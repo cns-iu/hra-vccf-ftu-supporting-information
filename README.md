@@ -18,7 +18,7 @@ The repo is structured in the following way:
 
 This code generate a photo clickable poster that connects all the 22 FTUs of 5th release HRA with vasculature in butterfly design. This has nodes as anatomical structures and edges as the cell types of both female and male organs.
 
-##### Requirements of code:
+##### Prerequisite:
     - python
     - pycharm (recommended)
     - jupyter
