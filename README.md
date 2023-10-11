@@ -8,8 +8,9 @@ Supriya Bidanta<sup>1,4</sup>, Katy Börner<sup>1,4,5</sup>, Bruce W. Herr II<su
 <sup>2</sup> Budapest University of Technology and Economics,Budapest, Hungary;
 <sup>3</sup> Harvard Medical School, Boston, MA
 
+<sup>4</sup> Contributed equally (co-first authors)
 <sup>5</sup> Corresponding authors 
-<sup>4</sup> Contributed equally (co-first authors) 
+ 
 
 The repo is structured in the following way:
 
