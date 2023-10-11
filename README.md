@@ -34,6 +34,9 @@ The code is segmented into four parts:
 - Add the vasculature to the network we built in previous steps.
 - Beautify and/or filter the visualization per the connections we have from the vasculature data.
 
+### Visualization:
+We have provided a 36" poster full image along with it two halves of the image as well. Since the poster is of 36",while taking a print we recommend to resize the two halves to 35.5" so that poster looks clean and aligned.
+
 
 
   
