@@ -4,9 +4,9 @@ Functional tissue units (FTUs) form the basic building blocks of organs and are 
 
 Supriya Bidanta<sup>1,4</sup>, Katy Börner<sup>1,4,5</sup>, Bruce W. Herr II<sup>1</sup>, Marcell Nagy<sup>2</sup>, Katherine S. Gustilo<sup>1</sup>, Rachel Bajema<sup>1</sup>, Libby Maier<sup>1</sup>, Roland Molontay<sup>2</sup>, Griffin Weber<sup>3,5</sup>
 
-</sup>1</sup>Indiana University, Bloomington, IN ; 
+</sup>1</sup> Indiana University, Bloomington, IN ; 
 </sup>2</sup> Budapest University of Technology and Economics,Budapest, Hungary;
-</sup>3</sup> Harvard Medical School, Boston, MA;
+</sup>3</sup> Harvard Medical School, Boston, MA
 
 </sup>5</sup> Corresponding authors 
 </sup>4</sup> Contributed equally (co-first authors) 
