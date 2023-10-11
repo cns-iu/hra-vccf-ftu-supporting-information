@@ -4,9 +4,11 @@ Functional tissue units (FTUs) form the basic building blocks of organs and are 
 
 The repo is structured in the following way:
 
-- Code
-- Data
-- Visualization
+```
+├── code
+├── data
+├── visualization
+```
 
   ### Data
 
