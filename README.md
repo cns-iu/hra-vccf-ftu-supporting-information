@@ -16,7 +16,7 @@ Renal Corpuscle:
   
   ### Butterfly Viz
 
-  - A Photo clickable poster that connects all the 22 FTUs of 5th release HRA with vasculature in butterfly design. This has nodes and edges of both female and male organs.
+  - A photo clickable poster that connects all the 22 FTUs of 5th release HRA with vasculature in butterfly design. This has nodes and edges of both female and male organs.
     #### Requirements of code:
     - python
     - jupyter or any editor of preference
