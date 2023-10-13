@@ -1,5 +1,5 @@
-### Input data sets:
-There are two sources of data for the visualization, one is for the organ partonomy network, and the other one is for the vascular network. The data tables for the organs have been downloaded from the ASCT+B reporter in “Graph Data” format which is a JSON file containing the nodes and the edges of the individual organ networks, which have the following format:
+### Input data
+There are two sources of data for the visualization, one is for the organ partonomy network, and the other one is for the vascular network. The data tables for the organs have been downloaded from the ASCT+B Reporter in “Graph Data” format which is a JSON file containing the nodes and the edges of the individual organ networks, which have the following format:
 
 ```json
 {
@@ -105,11 +105,11 @@ The code performs the following steps:
 Since the visualization follows the format from the ASCT+B reporter, in the anatomical structures are in the inner layers, while the cell types are at the last layer, meaning that the cell types are the leaves of the tree. 
 
 
-### Visualization
+### Partonomy radial tree layout
 To be able to visualize the network, the  `construct_network_create_vega_viz` performs the above-detailed data preprocessing and creates the node and edge lists. Then since the visualization is created in Vega (https://vega.github.io/editor), the output of this code is a JSON file that will be the input of Vega. The code identifies the parent node of each node (for the visualization), sets the color and labels of the nodes, and then using a template vega_config.json file writes the network data in the file and saves it in a new file. The visualization can be done by copy-pasting the content of the created JSON file in the online editor (https://vega.github.io/editor).
 
 
-### Vascular network
+### Vascular network layout
 The data input for the vascular network is the Vessel.csv file from here https://zenodo.org/records/7542316 which has the following format:
 
 |   |   BranchesFrom |                       Vessel |           ASID |    VesselType |      BodyPart |     BodyPartID |
@@ -137,7 +137,7 @@ The visualization of the vascular network is as follows:
 
 The output of the function is a pdf file. 
 
-### Overlay in Illustrator
+### Combine both visualizations in Illustrator
 Finally, the two networks have been overlaid in Adobe Illustrator as follows:
 1. Create a new canvas of size 1780x1780
 2. Import the organ visualization and set its parameters:
