@@ -86,20 +86,20 @@ The preprocessing part has the following steps:
 The code has one input: a dictionary, where the keys are the organs and the values are the downloaded JSON data, and the code outputs the data frames of the nodes and the edges.  
 The code performs the following steps:
 1. Create a new ID:
-  - In the data table, the ‘old_id’ column represents the id of the node in the corresponding organ table, and the new ‘id’ column is the node’s id in the whole body. The starting number of the IDs in the organs is always zero (zero is always the ID of ‘body’ and ‘1’ is the ID of the organ of the corresponding table). To be able to merge the tables, a new ID of the nodes is created where every ID is unique. 
+ 	 - In the data table, the ‘old_id’ column represents the id of the node in the corresponding organ table, and the new ‘id’ column is the node’s id in the whole body. The starting number of the IDs in the organs is always zero (zero is always the ID of ‘body’ and ‘1’ is the ID of the organ of the corresponding table). To be able to merge the tables, a new ID of the nodes is created where every ID is unique. 
 2. Filter nodes:
-  - Only the anatomical structures and cell types are kept
+  	- Only the anatomical structures and cell types are kept
 3. Extract the uberon ID
-  - The uberon ID is given as a metadata feature, and the code extracts it and gives it as a “main” property of the nodes
+  	- The uberon ID is given as a metadata feature, and the code extracts it and gives it as a “main” property of the nodes
 4. Merge the nodes of different organs
 5. Filter edges:
-  - The code removes those edges that are between cell types (if there are any) - if the graph data is correctly generated, there should not be any edges between cell types.
+  	- The code removes those edges that are between cell types (if there are any) - if the graph data is correctly generated, there should not be any edges between cell types.
 6. Renumber the edges:
-  - The edge list in the JSON file is given using the local “within-organ” ID, hence the organ IDs are replaced with the newly created global “within-body” ID to make the combined network visualization possible.
+  	- The edge list in the JSON file is given using the local “within-organ” ID, hence the organ IDs are replaced with the newly created global “within-body” ID to make the combined network visualization possible.
 7. Correction of organ data
-  - For some organs, the networks in the ASCT+B reporter are disconnected networks. To avoid that, some edges are manually added to connect these disconnected parts to the corresponding organ node.
+  	- For some organs, the networks in the ASCT+B reporter are disconnected networks. To avoid that, some edges are manually added to connect these disconnected parts to the corresponding organ node.
 8. Clone cell types:
-  - The network extracted from the JSON data should be a tree, but sometimes a cell type is linked to two or more different AS (it has many parents because all those AS contain that CT). In this case, this CT node is cloned (as many times as many additional parents it has), the new clones are appended to the node table with the same properties but new IDs, and they are connected to one of the AS parents, so each CT clone has only one parent. 
+  	- The network extracted from the JSON data should be a tree, but sometimes a cell type is linked to two or more different AS (it has many parents because all those AS contain that CT). In this case, this CT node is cloned (as many times as many additional parents it has), the new clones are appended to the node table with the same properties but new IDs, and they are connected to one of the AS parents, so each CT clone has only one parent. 
 9. Validate if the individual organ networks are trees (free of cycles and connected)
 
 Since the visualization follows the format from the ASCT+B reporter, in the anatomical structures are in the inner layers, while the cell types are at the last layer, meaning that the cell types are the leaves of the tree. 
@@ -122,18 +122,18 @@ The data input for the vascular network is the Vessel.csv file from here https:/
 
 The visualization of the vascular network is as follows:
 1. Get the matching nodes
-  - To be able to layover the vascular network over the organ network, first, the matching nodes have to be identified (nodes that are present in both data sources). The matching is based on the ‘ASID’ field of the vascular data and the ‘ontology_id’ field of the organ data. 
+  	- To be able to layover the vascular network over the organ network, first, the matching nodes have to be identified (nodes that are present in both data sources). The matching is based on the ‘ASID’ field of the vascular data and the ‘ontology_id’ field of the organ data. 
 2. Create the full vascular network
-  - The visualized network is a subgraph of the full vascular network, hence first, the full network has to be created. It is created using the ‘BranchesFrom’ and ‘Vessel’ columns with the former one being the source and the latter one being the target of the edges.
+  	- The visualized network is a subgraph of the full vascular network, hence first, the full network has to be created. It is created using the ‘BranchesFrom’ and ‘Vessel’ columns with the former one being the source and the latter one being the target of the edges.
 3. Prune the network at the matching nodes.
-  - The pruning algorithm is as follows: the first layer consists of the matching nodes, and then in each iteration, a new inner layer is constructed containing the parent nodes (vessels) of the nodes in the previous iteration. Hence, the algorithm discovers the nodes by moving from the matching nodes towards the core of the network. 
+  	- The pruning algorithm is as follows: the first layer consists of the matching nodes, and then in each iteration, a new inner layer is constructed containing the parent nodes (vessels) of the nodes in the previous iteration. Hence, the algorithm discovers the nodes by moving from the matching nodes towards the core of the network. 
 4. Make the network connected
-  - The original vascular network is given in a disconnected format, there is one network for each VesselType (one for veins, one for arteries, one for heart chambers, and so on). To make the network connected, the central vessels (right atrium, right ventricle, left atrium, left ventricle) of these networks are connected to a root node, called ‘blood vasculature’.
+  	- The original vascular network is given in a disconnected format, there is one network for each VesselType (one for veins, one for arteries, one for heart chambers, and so on). To make the network connected, the central vessels (right atrium, right ventricle, left atrium, left ventricle) of these networks are connected to a root node, called ‘blood vasculature’.
 5. Get the position/coordinates of the matching nodes
-  - To be able to layover the two networks on top of each other, the matching nodes must have the same coordinates. To ensure that, first we have to extract these coordinates from the Vega visualization. For that, we export the Vega visualization in JSON and then assign these coordinates to the matching nodes.
+  	- To be able to layover the two networks on top of each other, the matching nodes must have the same coordinates. To ensure that, first we have to extract these coordinates from the Vega visualization. For that, we export the Vega visualization in JSON and then assign these coordinates to the matching nodes.
 6. Visualize the network.
-   - For the visualization, we apply the spring layout of `networkx` which uses the Fruchterman-Reingold force-directed algorithm where we fix the position of the matching nodes using the extracted coordinates.
-   - To make the edges curved, we use the `hammer_bundle` function of the `Datashader` package
+   	- For the visualization, we apply the spring layout of `networkx` which uses the Fruchterman-Reingold force-directed algorithm where we fix the position of the matching nodes using the extracted coordinates.
+   	- To make the edges curved, we use the `hammer_bundle` function of the `Datashader` package
 
 The output of the function is a pdf file. 
 
@@ -141,13 +141,17 @@ Overlay in Illustrator
 Finally, the two networks have been overlaid in Adobe Illustrator as follows:
 1. Create a new canvas of size 1780x1780
 2. Import the organ visualization and set its parameters:
+   ```
       X: 920
       Y: 890
       W: 1720
       H: 1720
-3. Import the vascular network and set its parameters to the same:
+   ```
+4. Import the vascular network and set its parameters to the same:
+    ```
       X: 920
       Y: 890
       W: 1720
       H: 1720
-4. The female visualization is mirrored/flipped vertically
+    ```
+6. The female visualization is mirrored/flipped vertically
