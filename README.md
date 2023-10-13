@@ -40,6 +40,8 @@ The code expects organ data downloaded from the ASCT+B Reporter (https://hubmapc
 1. Visualize the vasculature network.
 1. Filter out nodes and edges as needed.
 
+<a href="https://docs.google.com/document/d/1iQnbq5Cvf_NK2w7M6x8glriSPcId5KoR0tq1LWxRauA/edit" target="_blank">Code Documentation</a>
+
 An graphics editor (e.g., Adobe Illustrator) was used to combine the two networks and to add legend, title, FTUs, and other information.
 
 ### Visualization
