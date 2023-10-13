@@ -34,7 +34,7 @@ This code generates a radial tree visualization of the anatomical structures par
     - packages: pyvis, networkx, datashader
     - Organ Data
 
-The code expects organ data downloaded from the ASCT+B Reporter (https://hubmapconsortium.github.io/ccf-asct-reporter) in JSON format as input. It has four parts:
+The code expects organ data downloaded from the <a href="https://hubmapconsortium.github.io/ccf-asct-reporter" target="_blank">ASCT+B Reporter</a> in JSON format as input. It has four parts:
 1. Compile data per the list of organs one wants to visualize.
 1. Layout the anatomical structures partonomy as a radial tree using Vega. Download the network in SVG and JSON format.
 1. Visualize the vasculature network.
