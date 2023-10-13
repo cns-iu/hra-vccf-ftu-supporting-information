@@ -137,7 +137,7 @@ The visualization of the vascular network is as follows:
 
 The output of the function is a pdf file. 
 
-Overlay in Illustrator
+### Overlay in Illustrator
 Finally, the two networks have been overlaid in Adobe Illustrator as follows:
 1. Create a new canvas of size 1780x1780
 2. Import the organ visualization and set its parameters:
