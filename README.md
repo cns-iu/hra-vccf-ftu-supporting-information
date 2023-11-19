@@ -1,6 +1,6 @@
 ## Functional Tissue Units in the Human Reference Atlas
 
-Supriya Bidanta<sup>1,4</sup>, Katy Börner<sup>1,4,5</sup>, Bruce W. Herr II<sup>1</sup>, Marcell Nagy<sup>2</sup>, Katherine S. Gustilo<sup>1</sup>, Rachel Bajema<sup>1</sup>, Libby Maier<sup>1</sup>, Roland Molontay<sup>2</sup>, Griffin Weber<sup>3,5</sup>
+Supriya Bidanta<sup>1,4</sup>, Katy Börner<sup>1,4,5</sup>, Ellen M. Quardokus<sup>1</sup>, Bruce W. Herr II<sup>1</sup>, Marcell Nagy<sup>2</sup>, Katherine S. Gustilo<sup>1</sup>, Rachel Bajema<sup>1</sup>, Libby Maier<sup>1</sup>, Roland Molontay<sup>2</sup>, Griffin Weber<sup>3,5</sup>
 
 <sup>1</sup> Indiana University, Bloomington, IN; 
 <sup>2</sup> Budapest University of Technology and Economics, Budapest, Hungary;
@@ -16,6 +16,7 @@ The repo is structured in the following way:
 ```
 ├── code
 ├── data
+├── exploration
 ├── visualization
 ```
 
