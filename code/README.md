@@ -1,4 +1,4 @@
-### Populate data for iFTU explorer
+### Populate data for iFTU explorer(iFTU_Explorer_marker_CT_info.ipynb)
 
 The code has been split into three sections:
 ```
@@ -27,7 +27,7 @@ The final step is to convert the result to JSON which is a usable format for iFT
 
 
 
-### Butterfly Visualisation
+### Butterfly Visualisation(HRA_Butterfly_viz.ipynb)
 #### Input data
 There are two sources of data for the visualization, one is for the organ partonomy network, and the other one is for the vascular network. The data tables for the organs have been downloaded from the ASCT+B Reporter in “Graph Data” format which is a JSON file containing the nodes and the edges of the individual organ networks, which have the following format:
 
