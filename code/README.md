@@ -1,13 +1,13 @@
 ### Populate data for iFTU explorer
 
 The code has been split into three sections:
-	 ```
+```
 	      1: Loading of the data and reference file
 	      2: Conversion of gene IDs and barcodes to readable format
 	      3: Generate the csv file with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression
 	      H: Coversion of csv file to json file
 
-	```
+```
 #### Input Data
 The code takes two level of data, one is the gene expression matrix, and the other one is a reference file that contains the cell name, sample, barcode, cluster, and the cell type information.
 
