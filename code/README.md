@@ -1,4 +1,34 @@
-### Input data
+### Populate data for iFTU explorer
+
+The code has been split into three sections:
+	 ```
+	      1: Loading of the data and reference file
+	      2: Conversion of gene IDs and barcodes to readable format
+	      3: Generate the csv file with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression
+	      H: Coversion of csv file to json file
+
+	```
+#### Input Data
+The code takes two level of data, one is the gene expression matrix, and the other one is a reference file that contains the cell name, sample, barcode, cluster, and the cell type information.
+
+![image](https://github.com/cns-iu/hra-vccf-ftu-supporting-information/assets/117299113/c0992202-285e-493d-9e24-21889b246dee)
+
+#### Conversion of gene IDs and barcodes to readable format
+First step of this section of the code converts the Ensembl IDs present in the dataset to HGNC symbol using the "Homo_sapiens.GRCh37.87.chr.gtf.gz" database which is downloaded from ensembl (https://ftp.ensembl.org/pub/grch37/current/gtf/homo_sapiens/). The code creates a mapping between the Ensembl IDs and HGNC symbol by creating a dictionary. The second step is to convert the column name from ATGC format to its respective cell type.
+
+
+#### Required result generation
+This step of the code is implemented to make generate the mean expression of each each per cell type. Once the data is loaded to a datarame, then it is converted to Anndata that which has its observations as columns name and variables as gene names. The gene expression matrix is accessed by anndata_object.X.
+Once the data is loaded in anndata, the code calulates the mean of each gene per cell type and normalise the value so that it lies in the range of 0 to 1. This is done by first subtracting the gene expression by np.min(gene_expression) and divide it by (np.max(gene_expression) - np.min(gene_expression)).
+
+#### Conversion of result.csv to JSON file
+
+The final step is to convert the result to JSON which is a usable format for iFTU portal. The JSONld file has three sections: 1. context 2. FTU informaton 3. Cell type and gene information.
+
+
+
+### Butterfly Visualisation
+#### Input data
 There are two sources of data for the visualization, one is for the organ partonomy network, and the other one is for the vascular network. The data tables for the organs have been downloaded from the ASCT+B Reporter in “Graph Data” format which is a JSON file containing the nodes and the edges of the individual organ networks, which have the following format:
 
 ```json
