@@ -1,6 +1,6 @@
 ### Populate data for iFTU explorer(iFTU_Explorer_marker_CT_info.ipynb)
 
-The code has been split into three sections:
+The code has been split into four sections:
 ```
 	      1: Loading of the data and reference file
 	      2: Conversion of gene IDs and barcodes to readable format
@@ -21,11 +21,65 @@ First step of this section of the code converts the Ensembl IDs present in the d
 This step of the code is implemented to make generate the mean expression of each each per cell type. Once the data is loaded to a datarame, then it is converted to Anndata that which has its observations as columns name and variables as gene names. The gene expression matrix is accessed by anndata_object.X.
 Once the data is loaded in anndata, the code calulates the mean of each gene per cell type and normalise the value so that it lies in the range of 0 to 1. This is done by first subtracting the gene expression by np.min(gene_expression) and divide it by (np.max(gene_expression) - np.min(gene_expression)).
 
+Data frame of the nodes:
+
+| cell type | CL ID | Ensembl gene id | HGNC gene ID | HGNC gene symbol | mean expression |
+|-----------|-------|-----------------|--------------|-------------------|----------------|
+| connecting tubule | CL:1000768 | ENSG00000127914 | HGNC:379   | AKAP9  | 0.24976267 |
+
+
+
 #### Conversion of result.csv to JSON file
 
-The final step is to convert the result to JSON which is a usable format for iFTU portal. The JSONld file has three sections: 1. context 2. FTU informaton 3. Cell type and gene information.
-
-
+The final step is to convert the result to JSON which is a usable format for iFTU portal. The JSONld file has three sections: 1. context 2. FTU informaton 3. Cell type and gene information. The JSONld has following format:
+```json
+{
+  "@context": [
+    "https://cns-iu.github.io/hra-cell-type-populations-supporting-information/data-processor/ccf-context.jsonld",
+    {
+      "UBERON": {
+        "@id": "http://purl.obolibrary.org/obo/UBERON_",
+        "@prefix": true
+      },
+      "illustration_files": {
+        "@id": "ccf:has_illustration_file",
+        "@type": "@id"
+      },
+      "mapping": {
+        "@id": "ccf:has_illustration_node",
+        "@type": "@id"
+      },
+      "organ_id": {
+        "@id": "ccf:organ_id",
+        "@type": "@id"
+      },
+      "data_sources": {
+        "@id": "ccf:has_data_source",
+        "@type": "@id"
+      }
+    }
+  ],
+    "@graph": [
+        {
+            "@type": "CellSummary",
+            "cell_source": "https://purl.humanatlas.io/2d-ftu/kidney-kidney-renal-corpuscle",
+            "annotation_method": "Aggregation",
+            "biomarker_type": "gene",
+            "summary": [
+		{
+                    "@type": "CellSummaryRow",
+                    "cell_id": "http://purl.obolibrary.org/obo/CL_0000057",
+                    "cell_label": "fibroblast",
+                    "genes": [
+                        {.....
+			}
+			]
+		}
+		]
+	}
+]
+}
+```
 
 ### Butterfly Visualisation(HRA_Butterfly_viz.ipynb)
 #### Input data
