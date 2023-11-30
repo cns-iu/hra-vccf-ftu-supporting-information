@@ -21,6 +21,7 @@ The repo is structured in the following way:
 ```
 
 ### Data
+The data folder consists of information about the blood vasculature of all the 22 FTUs. In addition, the supplementary files provides information about the cell types, cell count, percentage of each cell in FTU, top 100 expressed genes for eight FTUs of three organ kidney, liver and lung.
 ```
 Table 1: Supplemental file of vascular pathways. This data contains information about the 22 FTUs linked to the heart through vessels.
 Table 2: Supplemental file of experimental data for kidney, liver, and lung together with cell count, percentage per cell type per organ and mean gene expression values per cell type.
