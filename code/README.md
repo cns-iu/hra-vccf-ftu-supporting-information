@@ -8,10 +8,10 @@ This section entails two purpose:
 
 The code has been split into four sections:
 ```
-	      1: Loading of the data and reference file
-	      2: Conversion of gene IDs and barcodes to readable format
-	      3: Generate the csv file with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression
-	      4: Coversion of csv file to json file
+	      a: Loading of the data and reference file
+	      b: Conversion of gene IDs and barcodes to readable format
+	      c: Generate the csv file with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression
+	      d: Coversion of csv file to json file
 
 ```
 #### Input Data
@@ -25,7 +25,7 @@ First step of this section of the code converts the Ensembl IDs present in the d
 
 #### Required result generation
 This step of the code is implemented to make generate the mean expression of each each per cell type. Once the data is loaded to a datarame, then it is converted to Anndata that which has its observations as columns name and variables as gene names. The gene expression matrix is accessed by anndata_object.X.
-Once the data is loaded in anndata, the code calulates the mean of each gene per cell type and normalise the value so that it lies in the range of 0 to 1. This is done by first subtracting the gene expression by np.min(gene_expression) and divide it by (np.max(gene_expression) - np.min(gene_expression)).
+Once the data is loaded in anndata, the code calulates the mean of each gene per cell type and normalise the value so that it lies in the range of 0 to 1. This is done by first subtracting the gene expression by np.min(gene_expression) and then divide it by (np.max(gene_expression) - np.min(gene_expression)).
 
 Data frame of the nodes:
 
