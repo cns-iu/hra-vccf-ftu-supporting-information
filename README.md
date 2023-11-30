@@ -21,10 +21,11 @@ The repo is structured in the following way:
 ```
 
 ### Data
-
+```
 Table 1: Supplemental file of vascular pathways. This data contains information about the 22 FTUs linked to the heart through vessels.
 Table 2: Supplemental file of experimental data for kidney, liver, and lung together with cell count, percentage per cell type per organ and mean gene expression values per cell type.
 Table 3: Supplemental file of cell type per gene expression matrices for 11 FTUs with mapping between experimental data, 2D illustrations and ASCT+B table
+```
   
 ### Code
 
