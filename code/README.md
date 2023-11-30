@@ -34,6 +34,35 @@ Data frame of the nodes:
 | connecting tubule | CL:1000768 | ENSG00000127914 | HGNC:379   | AKAP9  | 0.24976267 |
 
 
+The HGNC gene IDs are populated using below R code:
+```
+# Load your CSV file containing cell types, genes, and mean expressions
+# Replace 'your_file.csv' with the actual file path
+data <- read.csv("result.csv")
+
+# Define the Ensembl dataset you want to query (e.g., human, GRCh38)
+ensembl <- useMart("ENSEMBL_MART_ENSEMBL", dataset = "hsapiens_gene_ensembl")
+
+# Create a vector of unique gene symbols
+unique_genes <- unique(data$Gene.Name)
+
+# Retrieve HGNC IDs for unique gene symbols
+hgnc_query <- getBM(
+  	filters = "hgnc_symbol",
+  	attributes = c("ensembl_gene_id","hgnc_symbol", "hgnc_id"),
+ 	 values = unique_genes,
+ 	 mart = ensembl
+)
+
+# Merge the HGNC IDs back into the original data
+data <- merge(data, hgnc_query, by.x = "Gene.Name", by.y = "hgnc_symbol", all.x = TRUE)
+
+# Save the updated data to a new CSV file
+write.csv(data, "data_with_hgnc_id.csv", row.names = FALSE
+
+```
+
+
 
 #### Conversion of result.csv to JSON file
 
