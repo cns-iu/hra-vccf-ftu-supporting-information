@@ -1,3 +1,9 @@
+This section entails two purpose:
+```
+1. Populate data for interactive FTU Explorer
+2. Create a 6-diameter poster using ASCT+B and Blood vasculature data in a Butterfly Visual.
+
+```
 ### Populate data for iFTU explorer(iFTU_Explorer_marker_CT_info.ipynb)
 
 The code has been split into four sections:
@@ -5,7 +11,7 @@ The code has been split into four sections:
 	      1: Loading of the data and reference file
 	      2: Conversion of gene IDs and barcodes to readable format
 	      3: Generate the csv file with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression
-	      H: Coversion of csv file to json file
+	      4: Coversion of csv file to json file
 
 ```
 #### Input Data
