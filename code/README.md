@@ -1,33 +1,32 @@
-This section entails two purpose:
-```
-1. Populate data for interactive FTU Explorer
+There are two Python notebooks used to compile data and render visualizations.
+
+1. Compile data for the Interactive FTU Explorer
 2. Create a 6-diameter poster using ASCT+B and Blood vasculature data in a Butterfly Visual.
 
-```
-### Populate data for iFTU explorer(iFTU_Explorer_marker_CT_info.ipynb)
+### Compile data for the Interactive FTU Explorer (FTU_Explorer_data.ipynb)
 
-The code has been split into four sections:
+Four steps are used to compile the data:
 ```
-	      a: Loading of the data and reference file
-	      b: Conversion of gene IDs and barcodes to readable format
-	      c: Generate the csv file with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression
-	      d: Coversion of csv file to json file
+1. Load data and reference file.
+2. Use Ensembl gene IDs and barcodes to retrieve  and cell type names and HGNC IDs.
+3. Generate CSV files with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression values.
+4. Convert CSV files to JSON files.
+```
 
-```
-#### Input Data
+##### Load data and reference file
+
 The code takes two level of data, one is the gene expression matrix, and the other one is a reference file that contains the cell name, sample, barcode, cluster, and the cell type information.
 
 ![image](https://github.com/cns-iu/hra-vccf-ftu-supporting-information/assets/117299113/c0992202-285e-493d-9e24-21889b246dee)
 
-#### Conversion of gene IDs and barcodes to readable format
+##### Use Ensembl gene IDs and barcodes to retrieve  and cell type names and HGNC IDs.
 First step of this section of the code converts the Ensembl IDs present in the dataset to HGNC symbol using the "Homo_sapiens.GRCh37.87.chr.gtf.gz" database which is downloaded from ensembl (https://ftp.ensembl.org/pub/grch37/current/gtf/homo_sapiens/). The code creates a mapping between the Ensembl IDs and HGNC symbol by creating a dictionary. The second step is to convert the column name from ATGC format to its respective cell type.
 
-
-#### Required result generation
+##### Generate CSV files with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression values.
 This step of the code is implemented to make generate the mean expression of each each per cell type. Once the data is loaded to a datarame, then it is converted to Anndata that which has its observations as columns name and variables as gene names. The gene expression matrix is accessed by anndata_object.X.
 Once the data is loaded in anndata, the code calulates the mean of each gene per cell type and normalise the value so that it lies in the range of 0 to 1. This is done by first subtracting the gene expression by np.min(gene_expression) and then divide it by (np.max(gene_expression) - np.min(gene_expression)).
 
-Data frame of the nodes:
+Preview of result.csv file
 
 | cell type | CL ID | Ensembl gene id | HGNC gene ID | HGNC gene symbol | mean expression |
 |-----------|-------|-----------------|--------------|-------------------|----------------|
@@ -62,9 +61,7 @@ write.csv(data, "data_with_hgnc_id.csv", row.names = FALSE
 
 ```
 
-
-
-#### Conversion of result.csv to JSON file
+#### Convert CSV files to JSON files
 
 The final step is to convert the result to JSON which is a usable format for iFTU portal. The JSONld file has three sections: 1. context 2. FTU informaton 3. Cell type and gene information. The JSONld has following format:
 ```json
@@ -116,7 +113,7 @@ The final step is to convert the result to JSON which is a usable format for iFT
 }
 ```
 
-### Butterfly Visualisation(HRA_Butterfly_viz.ipynb)
+### Butterfly Visualisation (HRA_Butterfly_viz.ipynb)
 #### Input data
 There are two sources of data for the visualization, one is for the organ partonomy network, and the other one is for the vascular network. The data tables for the organs have been downloaded from the ASCT+B Reporter in “Graph Data” format which is a JSON file containing the nodes and the edges of the individual organ networks, which have the following format:
 
