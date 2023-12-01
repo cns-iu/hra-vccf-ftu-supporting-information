@@ -1,20 +1,20 @@
 There are two Python notebooks used to compile data and render visualizations.
 
 1. Compile data for the Interactive FTU Explorer
-2. Create a 6-diameter poster using ASCT+B and Blood vasculature data in a Butterfly Visual.
-
+2. Create a 6-foot (26” or 193 cm) diameter poster using ASCT+B and Blood vasculature data in a Butterfly Visual.
+   
 ### Compile data for the Interactive FTU Explorer (FTU_Explorer_data.ipynb)
-
 Four steps are used to compile the data:
 ```
-1. Load data and reference file.
-2. Use Ensembl gene IDs and barcodes to retrieve  and cell type names and HGNC IDs.
-3. Generate CSV files with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression values.
-4. Convert CSV files to JSON files.
+1. Load data and reference file
+2. Use Ensembl gene IDs and barcodes to retrieve HGNC gene symbols and cell type names.      
+3. Generate CSV files with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression values
+4. Convert CSV files to JSON files
 ```
 
 ##### Load data and reference file
-The code reads the gene expression matrix and three reference files that contain the gene, cell name, sample, barcode, cluster, and the cell type information from [anatomogram website](https://www.ebi.ac.uk/gxa/sc/experiments?species=%22homo%20sapiens%22)
+The code reads the gene expression matrix and three reference files that contain the gene, cell name, sample, barcode, cluster, and the cell type information from [the Single Cell Expression Atlas (SCEA) website] (https://www.ebi.ac.uk/gxa/sc/experiments?species=%22homo%20sapiens%22) for kidney cortex [E-CURD-119](https://www.ebi.ac.uk/gxa/sc/experiments/E-CURD-119/downloads), liver [E-MTAB-10533](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-10553/downloads) and lung [E-GEOD-130148](https://www.ebi.ac.uk/gxa/sc/experiments/E-GEOD-130148/downloads)
+
 Preview of the Expdesign file:
 | CellName | Sample | Cell# | Cluster# | CellType |
 |-----------|-------|-----------------|--------------|-------------------|
@@ -26,17 +26,17 @@ Preview of the Expdesign file:
 ```Cluster#``` a number is assigned while clustering the dataset.
 ```CellType``` is the cell type label.
 
-The reference file with extension mtx_rows has the Ensemble gene name which will be loaded as the rows. The other file with extension mtx_cols has barcodes for cell type. This section of the code first loads the gene names as the index of the gene expression matrix. Next, the mtx_cols file loads the cell type barcode as the columns of the gene expression matrix.
+The reference file extension mtx_rows has the Ensembl gene ID which will be loaded as rows. The other reference file extension mtx_cols has barcodes for cell type. This section of the code first loads the gene names as the index of the gene expression matrix. Next, the mtx_cols file loads the cell type barcode as columns of the gene expression matrix.
 
 ##### Use Ensembl gene IDs and barcodes to retrieve and cell type names and HGNC IDs.
-This section of the code reads Ensembl gene IDs and retrieves HGNC IDs using the "Homo_sapiens.GRCh37.87.chr.gtf.gz" database which is downloaded from [ensembl database for human](https://ftp.ensembl.org/pub/grch37/current/gtf/homo_sapiens/). In a second step, the ATGC name format is used to retrieve the  respective cell type name by using the Expdesign file which comes from the anatomogram. Finally we generate two dictionaries, one for gene names and another for cell type.
+This section of the code reads Ensembl gene IDs and retrieves HGNC IDs using the "Homo_sapiens.GRCh37.87.chr.gtf.gz" database which is downloaded from [ensembl database for human](https://ftp.ensembl.org/pub/grch37/current/gtf/homo_sapiens/). In a second step, the barcode is used to retrieve the respective cell type name by using the Expdesign file which comes from the anatomogram. Finally we generate two dictionaries, one for gene names and another for cell type.
 
 ##### Generate CSV files with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression values.
 This step of the code computes the mean expression values for each cell type per FTU. In order to get the mean expression we have to clean the gene expression data. The first step to clean the data is to convert the dataframe to AnnData. This Anndata will have observations as cell type names and variables as gene names. The gene expression matrix is accessed by anndata_object.X. Once the data is converted to anndata, we filter the data for cell types with atleast 200 genes. This filtered is then normalized and converted to logarithmic values. After the final round of cleaning, the mean of each gene per cell type and normalizes the value so that it is in the range of 0 to 1 is calculated. This is done by first subtracting the gene expression by np.min(gene_expression) and then dividing it by (np.max(gene_expression) - np.min(gene_expression)).
 
 Preview of result.csv file
 
-| cell_label | ensemble_id | gene_label | mean expression |
+| cell_label | ensembl_id | gene_label | mean expression |
 |------------|-------------|------------|-----------------|
 | connecting tubule | ENSG00000127914 | AKAP9  | 0.24976267 |
 
@@ -70,7 +70,7 @@ write.csv(data, "data_with_hgnc_id.csv", row.names = FALSE
 ```
 Preview of the final CSV file:
 
-| cell_label | ensemble_id | gene_id | gene_label | mean_expression | 
+| cell_label | ensembl_id | gene_id | gene_label | mean_expression | 
 |-----------|-------|-----------------|--------------|-------------------|
 | connecting tubule | ENSG00000127914 | HGNC:379 | AKAP9  | 0.24976267 |
 
