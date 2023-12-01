@@ -20,11 +20,11 @@ Preview of the Expdesign file:
 |-----------|-------|-----------------|--------------|-------------------|
 | P1TLH_AAACCTGTCCTCATTA_1 | P1TLH | AAACCTGTCCTCATTA | 17   | Cholangiocytes  |
 
-```CellName``` is the combination of the Cell# and Sample.
-```Sample``` signifies a specific sample, experiment, condition, or batch in the dataset.
-```Cell#``` cell barcode which means each cell single-cell sequencing is tagged with a unique sequence (barcode) so that RNA sequences can be traced back to individual cells.
-```Cluster#``` a number is assigned while clustering the dataset.
-```CellType``` is the cell type label.
+- ```CellName``` is the combination of the Cell# and Sample.
+- ```Sample``` signifies a specific sample, experiment, condition, or batch in the dataset.
+- ```Cell#``` cell barcode which means each cell single-cell sequencing is tagged with a unique sequence (barcode) so that RNA sequences can be traced back to individual cells.
+- ```Cluster#``` a number is assigned while clustering the dataset.
+- ```CellType``` is the cell type label.
 
 The reference file extension mtx_rows has the Ensembl gene ID which will be loaded as rows. The other reference file extension mtx_cols has barcodes for cell type. This section of the code first loads the gene names as the index of the gene expression matrix. Next, the mtx_cols file loads the cell type barcode as columns of the gene expression matrix.
 
