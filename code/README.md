@@ -28,7 +28,7 @@ Preview of the Expdesign file:
 
 The reference file with extension mtx_rows has the Ensemble gene name which will be loaded as the rows. The other file with extension mtx_cols has barcodes for cell type. This section of the code first loads the gene names as the index of the gene expression matrix. Next, the mtx_cols file loads the cell type barcode as the columns of the gene expression matrix.
 
-##### Use Ensembl gene IDs and barcodes to retrieve  and cell type names and HGNC IDs.
+##### Use Ensembl gene IDs and barcodes to retrieve and cell type names and HGNC IDs.
 This section of the code reads Ensembl gene IDs and retrieves HGNC IDs using the "Homo_sapiens.GRCh37.87.chr.gtf.gz" database which is downloaded from [ensembl database for human](https://ftp.ensembl.org/pub/grch37/current/gtf/homo_sapiens/). In a second step, the ATGC name format is used to retrieve the  respective cell type name by using the Expdesign file which comes from the anatomogram. Finally we generate two dictionaries, one for gene names and another for cell type.
 
 ##### Generate CSV files with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression values.
