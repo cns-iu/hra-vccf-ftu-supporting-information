@@ -14,23 +14,31 @@ Four steps are used to compile the data:
 ```
 
 ##### Load data and reference file
+The code reads the gene expression matrix and three reference files that contain the gene, cell name, sample, barcode, cluster, and the cell type information from [anatomogram website](https://www.ebi.ac.uk/gxa/sc/experiments?species=%22homo%20sapiens%22)
+Preview of the Expdesign file:
+| CellName | Sample | Cell# | Cluster# | CellType |
+|-----------|-------|-----------------|--------------|-------------------|
+| P1TLH_AAACCTGTCCTCATTA_1 | P1TLH | AAACCTGTCCTCATTA | 17   | Cholangiocytes  |
 
-The code takes two level of data, one is the gene expression matrix, and the other one is a reference file that contains the cell name, sample, barcode, cluster, and the cell type information.
+```CellName``` is the combination of the Cell# and Sample.
+```Sample``` signifies a specific sample, experiment, condition, or batch in the dataset.
+```Cell#``` cell barcode which means each cell single-cell sequencing is tagged with a unique sequence (barcode) so that RNA sequences can be traced back to individual cells.
+```Cluster#``` a number is assigned while clustering the dataset.
+```CellType``` is the cell type label.
 
-![image](https://github.com/cns-iu/hra-vccf-ftu-supporting-information/assets/117299113/c0992202-285e-493d-9e24-21889b246dee)
+The reference file with extension mtx_rows has the Ensemble gene name which will be loaded as the rows. The other file with extension mtx_cols has barcodes for cell type. This section of the code first loads the gene names as the index of the gene expression matrix. Next, the mtx_cols file loads the cell type barcode as the columns of the gene expression matrix.
 
 ##### Use Ensembl gene IDs and barcodes to retrieve  and cell type names and HGNC IDs.
-First step of this section of the code converts the Ensembl IDs present in the dataset to HGNC symbol using the "Homo_sapiens.GRCh37.87.chr.gtf.gz" database which is downloaded from ensembl (https://ftp.ensembl.org/pub/grch37/current/gtf/homo_sapiens/). The code creates a mapping between the Ensembl IDs and HGNC symbol by creating a dictionary. The second step is to convert the column name from ATGC format to its respective cell type.
+This section of the code reads Ensembl gene IDs and retrieves HGNC IDs using the "Homo_sapiens.GRCh37.87.chr.gtf.gz" database which is downloaded from [ensembl database for human](https://ftp.ensembl.org/pub/grch37/current/gtf/homo_sapiens/). In a second step, the ATGC name format is used to retrieve the  respective cell type name by using the Expdesign file which comes from the anatomogram. Finally we generate two dictionaries, one for gene names and another for cell type.
 
 ##### Generate CSV files with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression values.
-This step of the code is implemented to make generate the mean expression of each each per cell type. Once the data is loaded to a datarame, then it is converted to Anndata that which has its observations as columns name and variables as gene names. The gene expression matrix is accessed by anndata_object.X.
-Once the data is loaded in anndata, the code calulates the mean of each gene per cell type and normalise the value so that it lies in the range of 0 to 1. This is done by first subtracting the gene expression by np.min(gene_expression) and then divide it by (np.max(gene_expression) - np.min(gene_expression)).
+This step of the code computes the mean expression values for each cell type per FTU. In order to get the mean expression we have to clean the gene expression data. The first step to clean the data is to convert the dataframe to AnnData. This Anndata will have observations as cell type names and variables as gene names. The gene expression matrix is accessed by anndata_object.X. Once the data is converted to anndata, we filter the data for cell types with atleast 200 genes. This filtered is then normalized and converted to logarithmic values. After the final round of cleaning, the mean of each gene per cell type and normalizes the value so that it is in the range of 0 to 1 is calculated. This is done by first subtracting the gene expression by np.min(gene_expression) and then dividing it by (np.max(gene_expression) - np.min(gene_expression)).
 
 Preview of result.csv file
 
-| cell type | CL ID | Ensembl gene id | HGNC gene ID | HGNC gene symbol | mean expression |
-|-----------|-------|-----------------|--------------|-------------------|----------------|
-| connecting tubule | CL:1000768 | ENSG00000127914 | HGNC:379   | AKAP9  | 0.24976267 |
+| cell_label | ensemble_id | gene_label | mean expression |
+|------------|-------------|------------|-----------------|
+| connecting tubule | ENSG00000127914 | AKAP9  | 0.24976267 |
 
 
 The HGNC gene IDs are populated using below R code:
@@ -60,10 +68,33 @@ data <- merge(data, hgnc_query, by.x = "Gene.Name", by.y = "hgnc_symbol", all.x 
 write.csv(data, "data_with_hgnc_id.csv", row.names = FALSE
 
 ```
+Preview of the final CSV file:
+
+| cell_label | ensemble_id | gene_id | gene_label | mean_expression | 
+|-----------|-------|-----------------|--------------|-------------------|
+| connecting tubule | ENSG00000127914 | HGNC:379 | AKAP9  | 0.24976267 |
 
 #### Convert CSV files to JSON files
 
-The final step is to convert the result to JSON which is a usable format for iFTU portal. The JSONld file has three sections: 1. context 2. FTU informaton 3. Cell type and gene information. The JSONld has following format:
+The final step is to convert the CSV file to JSON that can be used by the Interactive FTU Explorer. The JSON file has two sections called context and graph. The context section is a framework for the CSV file asking UBERON, illustration_files, mapping, organ_id and datasource information. The graph section contains the summary of the FTU. This summary has information about the cell id, cell type label, genes associated with that cell,count and percentage of that cell type. This summary structure is repeated for all the cell types available in the CSV file generated in the above step.
+
+This section reads data from two CSV files (summary.csv and genes.csv), and then use this data to construct a JSON object that represents a structured view of cell summaries and gene expressions. This JSON object is then saved to a file named <organ>.json. 
+
+Here's a breakdown of what your script is doing:
+
+1. ***Reading CSV Files***: It reads data from two CSV files into pandas DataFrames (summary_df and genes_df). These files contain information about cell summaries and gene expressions, respectively.
+
+2. ***Initializing JSON Data Structure***: The script initializes a JSON object (data) with a specific structure, including a graph of cell summaries.
+
+3. ***Creating a Cell-Label-to-Genes Mapping***: The script iterates over the rows of the genes_df DataFrame to construct a dictionary (cell_label_to_genes). This dictionary maps cell labels to their corresponding gene information.
+
+4. ***Populating JSON Structure with Data from Summary CSV***: The script iterates over the rows of the summary_df DataFrame. For each row, it creates a cell summary object that includes cell ID, label, associated genes (retrieved from the previously created mapping), count, and percentage. These cell summary objects are appended to the summary list within the JSON structure.
+
+5. ***Saving JSON Data to a File**: Finally, the script writes the JSON data to a file named <organ>.json.
+
+6. ***Confirmation Message***: After saving the JSON file, it prints a confirmation message.
+
+An example for one cell type in the kidney-kidney-renal-corpuscle is given here:
 ```json
 {
   "@context": [
