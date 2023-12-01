@@ -8,8 +8,8 @@ Four steps are used to compile the data:
 ```
 1. Load data and reference file
 2. Use Ensembl gene IDs and barcodes to retrieve HGNC gene symbols and cell type names.      
-3. Generate CSV files with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression values
-4. Convert CSV files to JSON files
+3. Generate CSV file with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression values
+4. Convert CSV file to JSON files
 ```
 
 ##### Load data and reference file
