@@ -15,7 +15,7 @@ Four steps are used to compile the data:
 ```
 
 ##### Load data and reference file
-The code reads the gene expression matrix and three reference files that contain the gene, cell name, sample, barcode, cluster, and the cell type information from [the Single Cell Expression Atlas (SCEA) website] (https://www.ebi.ac.uk/gxa/sc/experiments?species=%22homo%20sapiens%22) for kidney cortex [E-CURD-119](https://www.ebi.ac.uk/gxa/sc/experiments/E-CURD-119/downloads), liver [E-MTAB-10533](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-10553/downloads) and lung [E-GEOD-130148](https://www.ebi.ac.uk/gxa/sc/experiments/E-GEOD-130148/downloads)
+The code reads the gene expression matrix and three reference files that contain the gene, cell name, sample, barcode, cluster, and the cell type information from the [Single Cell Expression Atlas Portal] (https://www.ebi.ac.uk/gxa/sc/experiments?species=%22homo%20sapiens%22) for kidney cortex [E-CURD-119](https://www.ebi.ac.uk/gxa/sc/experiments/E-CURD-119/downloads), liver [E-MTAB-10533](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-10553/downloads) and lung [E-GEOD-130148](https://www.ebi.ac.uk/gxa/sc/experiments/E-GEOD-130148/downloads)
 
 Preview of the Expdesign file:
 | CellName | Sample | Cell# | Cluster# | CellType |
