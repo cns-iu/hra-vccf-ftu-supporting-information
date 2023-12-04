@@ -14,36 +14,31 @@ Functional tissue units (FTUs) form the basic building blocks of organs and are 
 The repo is structured in the following way:
 
 ```
-├── code
 ├── data
+├── code
 ├── exploration
 ├── visualization
 ```
 
 ### Data
-The data folder consists of information about the blood vasculature of all the 22 FTUs. Alng with the cell types, cell count, percentage of each cell in FTU, top 100 expressed genes for eight FTUs of three organ kidney, liver and lung, the folder has illustration(SVG, PNG, AI file format) and cell count information about small intestine - intestinal villus.
-```
-Table 1: Supplemental file of vascular pathways. This data contains information about the 22 FTUs linked to the heart through vessels.
-Table 2: Supplemental file of experimental data for kidney, liver, and lung together with cell count, percentage per cell type per organ and mean gene expression values per cell type.
-Table 3: Supplemental file of cell type per gene expression matrices for 11 FTUs with mapping between experimental data, 2D illustrations and ASCT+B table
-```
+The data folder has the 3 supplemental tables and the intestinal villus FTU in the small intestine (SVG, PNG, AI file format) which will be published with the 6th release of the HRA on December 15, 2023.
   
 ### Code
-
-The two codes generates a web compatible JSON file for the interactive FTU explorer and a radial tree visualization of the anatomical structures partonomy. 
-The butterly visualisation interlinks FTUs of the 5th HRA release via the vasculature. The visualization is composed of two radial tree graphs: (1) The first graph contains the nested “partonomy” of the anatomical structures in the HRA. (2) The second graph contains all the blood vessels in the HRA, with the chambers of the heart in the center, and increasing smaller vessels more distal to the heart again branching outwards from the center.
+Two Python notebooks are provided. Run FTU_Explorer_data.ipynb to compile data for the Interactive FTU Explorer visualization. Run HRA_Butterfly_viz.ipynb to generate a radial tree butterfly resembling visualization of the anatomical structures partonomy with an overlay of the vasculature tree that connects the chambers of the heart in the center via increasingly smaller vessels to the 22 FTUs.
 
 ##### Prerequisite:
-  - python (version > 3.9)
+  - Python (version > 3.9)
   - R-studio
   - pycharm (recommended)
   - jupyter
-  - packages: pyvis, networkx, datashader, scanpy  ``` pip install pyvis, networkx, datashader, scanpy```
-  - Organ Data
+  - packages: pyvis, networkx, datashader, scanpy  ``` pip install pyvis, datashader, scanpy```
 
-The interactive FTU Explorer code uses single-nucleus RNA sequencing data obtained from the <a href="https://www.ebi.ac.uk/gxa/sc/experiments?species=%22homo%20sapiens%22" target="_blank">Single Cell Expression Atlas website</a> for various organs that have anatomograms attached to them. The reference files are loaded to obtain the gene and cell type information, which is then used to create a dataframe that includes cell type, Ensemble ID, HGNC gene ID, HGNC gene symbol, and mean expression value. This dataframe is then converted to a JSON file that is utilized by the interactive FTU explorer portal.
+The interactive FTU Explorer code uses single-nucleus RNA sequencing data from the <a href="https://www.ebi.ac.uk/gxa/sc/experiments?species=%22homo%20sapiens%22" target="_blank">Single Cell Expression Atlas Portal</a> for organs that have anatomograms. The reference files are used to compute gene and cell type information, Ensemble ID, HGNC gene ID, HGNC gene symbol, and mean expression values. This data is then converted to a JSON file that is read by the Interactive FTU Explorer.
 
-To use the butterfly visualisation code, you'll need to download organ data from the <a href="https://hubmapconsortium.github.io/ccf-asct-reporter" target="_blank">ASCT+B Reporter</a> in JSON format. Once you have the data, you can use a graphics editor like Adobe Illustrator to combine the two networks and add a legend, title, FTUs, and any other information you need.
+The butterfly visualization code reads  data from the <a href="https://hubmapconsortium.github.io/ccf-asct-reporter" target="_blank">ASCT+B Reporter</a> in JSON format. It generates SVG files that can be combined and post-processed in a graphics editor like Adobe Illustrator to add a legend, title, FTUs, and any other information.
+
+### Exploration
+Two JSON files are included. The file named ```ftu-datasets.jsonld``` contains details about the FTU and the data source utilized for retrieving FTU data. The file ```ftu-cell-summaries.jsonld``` provides information on cell types, genes, and the average expression for each cell type.
 
 ### Visualization
 The directory features all files to view and print the 36" poster. To print the poster on a 36" printer, resize the two halves to 35.5".
