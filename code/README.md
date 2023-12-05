@@ -31,10 +31,10 @@ Preview of the Expdesign file:
 The reference file extension mtx_rows has the Ensembl gene ID which will be loaded as rows. The other reference file extension mtx_cols has barcodes for cell type. This section of the code first loads the gene names as the index of the gene expression matrix. Next, the mtx_cols file loads the cell type barcode as columns of the gene expression matrix.
 
 ##### Use Ensembl gene IDs and barcodes to retrieve and cell type names and HGNC IDs.
-This section of the code reads Ensembl gene IDs and retrieves HGNC IDs using the *Homo_sapiens.GRCh37.87.chr.gtf.gz* database which is downloaded from [ensembl database for human](https://ftp.ensembl.org/pub/grch37/current/gtf/homo_sapiens/). In a second step, the barcode is used to retrieve the respective cell type name by using the Expdesign file which comes from the anatomogram. Finally we generate two dictionaries, one for gene names and another for cell type.
+This section of the code reads Ensembl gene IDs and retrieves HGNC IDs using the *Homo_sapiens.GRCh37.87.chr.gtf.gz* database which is downloaded from [Ensembl database for human](https://ftp.ensembl.org/pub/grch37/current/gtf/homo_sapiens/). In a second step, the barcode is used to retrieve the respective cell type name by using the Expdesign file which comes from the anatomogram. Finally, we generate two dictionaries, one for gene names and another for cell types.
 
 ##### Generate CSV files with cell type label, Ensembl ID, HGNC ID, HGNC Symbol and mean expression values.
-To accurately calculate average expression values for each cell type within a Functional Tissue Unit (FTU), it is imperative to preprocess the gene expression data first. This involves initially transforming the DataFrame into an AnnData structure, wherein the cell type appellations are designated as observations and gene appellations as variables. The matrix encapsulating gene expression can be accessed via anndata_object.X. Subsequently, the dataset undergoes a filtration process, retaining only those cell types associated with a minimum of 200 genes. The data undergoes a normalization procedure and is transformed into a logarithmic scale. In the final data cleansing stage, normalization of the mean expression for each gene across cell types is conducted, scaling the values to range between 0 and 1. This is achieved by deducting the minimum gene expression (np.min(gene_expression)) from each gene expression value and then dividing the result by the range of gene expression values (np.max(gene_expression) - np.min(gene_expression)).
+To accurately calculate average expression values for each cell type within a Functional Tissue Unit (FTU), it is imperative to preprocess the gene expression data first. This involves initially transforming the DataFrame into an AnnData structure, wherein the cell type appellations are designated as observations and gene appellations as variables. The matrix encapsulating gene expression can be accessed via anndata_object.X. Subsequently, the dataset undergoes a filtration process, retaining only those cell types associated with a atleast of 200 genes. The data undergoes a normalization procedure and is transformed into a logarithmic scale. In the final data cleansing stage, normalization of the mean expression for each gene across cell types is conducted, scaling the values to range between 0 and 1. This is achieved by deducting the minimum gene expression (np.min(gene_expression)) from each gene expression value and then dividing the result by the range of gene expression values (np.max(gene_expression) - np.min(gene_expression)).
 
 Preview of result.csv file
 
@@ -82,7 +82,7 @@ The final step is to convert the CSV file to JSON that can be used by the Intera
 
 This section reads data from two CSV files (summary.csv and genes.csv), and then use this data to construct a JSON object that represents a structured view of cell summaries and gene expressions. This JSON object is then saved to a file named <organ>.json. 
 
-Here's a breakdown of what your script is doing:
+Here's a breakdown of what the script is doing:
 
 1. ***Reading CSV Files***: It reads data from two CSV files into pandas DataFrames (summary_df and genes_df). These files contain information about cell summaries and gene expressions, respectively.
 
@@ -147,7 +147,7 @@ An example for one cell type in the kidney-kidney-renal-corpuscle is given here:
 ```
 
 ### Butterfly Visualisation (HRA_Butterfly_viz.ipynb)
-#### Input data
+##### Input data
 There are two sources of data for the visualization, one is for the organ partonomy network, and the other one is for the vascular network. The data tables for the organs have been downloaded from the ASCT+B Reporter in “Graph Data” format which is a JSON file containing the nodes and the edges of the individual organ networks, which have the following format:
 
 ```json
@@ -200,7 +200,7 @@ There are two sources of data for the visualization, one is for the organ parton
 
 There are two components of the “data”, the first is the node list, which contains the ID of the node (within the organ), the name, and the type (AS, CT, BM, gene), and then there is some metadata as well. From the metadata, the only field that we use is the “ontologyId”. 
 
-### Data Processing
+##### Data Processing
 The data preprocessing Python code merges the nodes and edges of the organs and transforms the data in the following table format:
 
 Data frame of the nodes:
@@ -254,11 +254,11 @@ The code performs the following steps:
 Since the visualization follows the format from the ASCT+B reporter, in the anatomical structures are in the inner layers, while the cell types are at the last layer, meaning that the cell types are the leaves of the tree. 
 
 
-### Partonomy radial tree layout
+##### Partonomy radial tree layout
 To be able to visualize the network, the  `construct_network_create_vega_viz` performs the above-detailed data preprocessing and creates the node and edge lists. Then since the visualization is created in Vega (https://vega.github.io/editor), the output of this code is a JSON file that will be the input of Vega. The code identifies the parent node of each node (for the visualization), sets the color and labels of the nodes, and then using a template vega_config.json file writes the network data in the file and saves it in a new file. The visualization can be done by copy-pasting the content of the created JSON file in the online editor (https://vega.github.io/editor).
 
 
-### Vascular network layout
+##### Vascular network layout
 The data input for the vascular network is the Vessel.csv file from here https://zenodo.org/records/7542316 which has the following format:
 
 |   |   BranchesFrom |                       Vessel |           ASID |    VesselType |      BodyPart |     BodyPartID |
@@ -286,7 +286,7 @@ The visualization of the vascular network is as follows:
 
 The output of the function is a pdf file. 
 
-### Combine both visualizations in Illustrator
+##### Combine both visualizations in Illustrator
 Finally, the two networks have been overlaid in Adobe Illustrator as follows:
 1. Create a new canvas of size 1780x1780
 2. Import the organ visualization and set its parameters:
@@ -296,11 +296,11 @@ Finally, the two networks have been overlaid in Adobe Illustrator as follows:
       W: 1720
       H: 1720
    ```
-4. Import the vascular network and set its parameters to the same:
+3. Import the vascular network and set its parameters to the same:
     ```
       X: 920
       Y: 890
       W: 1720
       H: 1720
     ```
-6. The female visualization is mirrored/flipped vertically
+4. The female visualization is mirrored/flipped vertically.
