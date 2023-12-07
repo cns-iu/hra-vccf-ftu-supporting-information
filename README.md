@@ -33,7 +33,7 @@ Two Python notebooks are provided. Run FTU_Explorer_data.ipynb to compile data f
   - jupyter
   - packages: pyvis, networkx, datashader, scanpy  ``` pip install pyvis, datashader, scanpy```
 
-The interactive FTU Explorer code uses single-nucleus RNA sequencing data from the <a href="https://www.ebi.ac.uk/gxa/sc/experiments?species=%22homo%20sapiens%22" target="_blank">Single Cell Expression Atlas Portal</a> for organs that have anatomograms. The reference files are used to compute gene and cell type information, Ensemble ID, HGNC gene ID, HGNC gene symbol, and mean expression values. This data is then converted to a JSON file that is read by the Interactive FTU Explorer.
+The interactive FTU Explorer code uses single-nucleus RNA sequencing data from the <a href="https://www.ebi.ac.uk/gxa/sc/experiments?species=%22homo%20sapiens%22" target="_blank">Single Cell Expression Atlas Portal</a> for organs that have anatomograms. The reference files are used to compute gene and cell type information, Ensemble ID, HGNC gene ID, HGNC gene symbol, count and percentage of cell type, and mean expression values. This data is then converted to a JSON file that is read by the Interactive FTU Explorer.
 
 The butterfly visualization code reads  data from the <a href="https://hubmapconsortium.github.io/ccf-asct-reporter" target="_blank">ASCT+B Reporter</a> in JSON format. It generates SVG files that can be combined and post-processed in a graphics editor like Adobe Illustrator to add a legend, title, FTUs, and any other information.
 
