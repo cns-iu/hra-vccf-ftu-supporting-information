@@ -1,5 +1,4 @@
 Organ,FTU Label in Uberon,FTU ID in Uberon,CT Label in CL,CT ID in CL,CT Label in 2D Object,#CT,#AS
-,,,,,,,
 Small Intestine,intestinal villus,UBERON 0001213,natural killer cell,CL:0000623,natural killer cell,3,
 Small Intestine,intestinal villus,UBERON 0001213,fibroblast,CL:0000057,fibroblast,18,
 Small Intestine,intestinal villus,UBERON 0001213,tuft cell of small intestine,CL:0009080,tuft cell of small intestine,18,
