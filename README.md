@@ -21,7 +21,7 @@ The repo is structured in the following way:
 ```
 
 ### Data
-The data folder has the 3 supplemental tables and the intestinal villus FTU in the small intestine (SVG, PNG, AI file format) which will be published with the 6th release of the HRA on December 15, 2023.
+The data folder has the 1 supplemental table and the intestinal villus FTU in the small intestine (SVG, PNG, AI file format) together with a table that lists the different types of cells in each of the 22 FTUs which will be published with the 6th release of the HRA end of December 2023.
   
 ### Code
 Two Python notebooks are provided. Run FTU_Explorer_data.ipynb to compile data for the Interactive FTU Explorer visualization. Run HRA_Butterfly_viz.ipynb to generate a radial tree butterfly resembling visualization of the anatomical structures partonomy with an overlay of the vasculature tree that connects the chambers of the heart in the center via increasingly smaller vessels to the 22 FTUs.
@@ -31,14 +31,14 @@ Two Python notebooks are provided. Run FTU_Explorer_data.ipynb to compile data f
   - R-studio
   - pycharm (recommended)
   - jupyter
-  - packages: pyvis, networkx, datashader, scanpy  ``` pip install pyvis, networkx, datashader, scanpy```
+  - packages: pyvis, networkx, datashader, scanpy  
 
 The interactive FTU Explorer code uses single-nucleus RNA sequencing data from the <a href="https://www.ebi.ac.uk/gxa/sc/experiments?species=%22homo%20sapiens%22" target="_blank">Single Cell Expression Atlas Portal</a> for organs that have anatomograms. The reference files are used to compute gene and cell type information, Ensemble ID, HGNC gene ID, HGNC gene symbol, count and percentage of cell type, and mean expression values. This data is then converted to a JSON file that is read by the Interactive FTU Explorer.
 
 The butterfly visualization code reads  data from the <a href="https://hubmapconsortium.github.io/ccf-asct-reporter" target="_blank">ASCT+B Reporter</a> in JSON format. It generates SVG files that can be combined and post-processed in a graphics editor like Adobe Illustrator to add a legend, title, FTUs, and any other information.
 
 ### Exploration
-Two JSON files are included. The file named ```ftu-datasets.jsonld``` contains details about the FTU and the data source utilized for retrieving FTU data. The file ```ftu-cell-summaries.jsonld``` provides information on cell types, genes, and the average expression for each cell type.
+Two tables and two JSON files are provided for use in the Interactive FTU Explorer. Table-A has experimental data for kidney, liver, and lung together with cell count and percentage per cell type per organ. Table-B has data on cell type per gene expression matrices for 11 FTUs with percentages and mean expression values per cell type. The file named ```ftu-datasets.jsonld``` contains details about the FTU and the data source utilized for retrieving FTU data. The file ```ftu-cell-summaries.jsonld``` provides information on cell types, genes, and the average expression for each cell type.   
 
 ### Visualization
 The directory features all files to view and print the 36" poster. To print the poster on a 36" printer, resize the two halves to 35.5".
