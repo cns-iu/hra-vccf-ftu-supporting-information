@@ -31,7 +31,7 @@ Two Python notebooks are provided. Run FTU_Explorer_data.ipynb to compile data f
   - R-studio
   - pycharm (recommended)
   - jupyter
-  - packages: pyvis, networkx, datashader, scanpy  ``` pip install pyvis, datashader, scanpy```
+  - packages: pyvis, networkx, datashader, scanpy  ``` pip install pyvis, networkx, datashader, scanpy```
 
 The interactive FTU Explorer code uses single-nucleus RNA sequencing data from the <a href="https://www.ebi.ac.uk/gxa/sc/experiments?species=%22homo%20sapiens%22" target="_blank">Single Cell Expression Atlas Portal</a> for organs that have anatomograms. The reference files are used to compute gene and cell type information, Ensemble ID, HGNC gene ID, HGNC gene symbol, count and percentage of cell type, and mean expression values. This data is then converted to a JSON file that is read by the Interactive FTU Explorer.
 
