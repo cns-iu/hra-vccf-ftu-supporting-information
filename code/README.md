@@ -1,4 +1,4 @@
-## Code for the data exploration and butterfly visualisation
+## Code for FTU data exploration and butterfly visualisation
 
 There are two Python notebooks used to compile data and render visualizations.
 
